@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agenda-service
+  labels:
+    app: agenda-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: agenda-service
+  template:
+    metadata:
+      labels:
+        app: agenda-service
+    spec:
+      containers:
+      - name: agenda-service
+        image: stephenako/agenda-service:latest
+        ports:
+        - containerPort: 3000
+
