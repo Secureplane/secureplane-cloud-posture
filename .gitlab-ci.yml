@@ -1,0 +1,26 @@
+include:
+  - local: '.gitlab/ci/cnapp.gitlab-ci.yml'
+  - local: '.gitlab/ci/iac.gitlab-ci.yml'
+  - local: '.gitlab/ci/test.gitlab-ci.yml'
+  - local: '.gitlab/ci/security.gitlab-ci.yml'
+
+variables:
+  TF_STATE_NAME: ${CI_PROJECT_PATH_SLUG}
+  TF_WORKSPACE: ${CI_ENVIRONMENT_NAME}
+  CNAPP_ENV: ${CI_ENVIRONMENT_NAME}
+  WIZ_API_KEY: ${WIZ_API_KEY}
+  WIZ_API_SECRET: ${WIZ_API_SECRET}
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_MERGE_REQUEST_ID
+    - if: $CI_COMMIT_TAG
+
+stages:
+  - test
+  - cnapp-scan
+  - iac-validate
+  - iac-plan
+  - iac-apply
+  - security

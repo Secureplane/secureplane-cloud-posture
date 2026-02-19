@@ -1,0 +1,18 @@
+cloud_security:
+  aws:
+    enabled: true
+    regions:
+      - us-east-1
+      - us-west-2
+    scanning:
+      services:
+        - ec2
+        - s3
+        - rds
+        - lambda
+    compliance:
+      frameworks:
+        - name: CIS
+          version: "1.4"
+        - name: NIST
+          version: "800-53"

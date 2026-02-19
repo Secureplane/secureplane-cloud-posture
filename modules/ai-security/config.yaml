@@ -1,0 +1,20 @@
+ai_security:
+  enabled: true
+  scanning:
+    interval: 3600
+    types:
+      - model_vulnerabilities
+      - data_leakage
+      - supply_chain
+  policies:
+    - name: model-access-control
+      enabled: true
+    - name: data-privacy
+      enabled: true
+    - name: supply-chain-security
+      enabled: true
+  integrations:
+    - name: huggingface
+      enabled: true
+    - name: openai
+      enabled: true

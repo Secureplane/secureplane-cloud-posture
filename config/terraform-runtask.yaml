@@ -1,0 +1,36 @@
+```yaml
+terraform:
+  runtask:
+    enabled: true
+    organization: "your-org"
+    enforcement_level: "mandatory"
+    policy_sets:
+      - "security-baseline"
+      - "compliance-checks"
+    
+    policies:
+      block_public_access:
+        enabled: true
+        severity: "HIGH"
+      encryption_required:
+        enabled: true
+        severity: "HIGH"
+      secure_networking:
+        enabled: true
+        severity: "MEDIUM"
+
+    notifications:
+      slack:
+        enabled: true
+        channel: "#security-alerts"
+      email:
+        enabled: true
+        recipients:
+          - security-team@company.com
+
+    integrations:
+      terraform_cloud:
+        enabled: true
+        api_token: ${TF_API_TOKEN}
+        organization: ${TF_ORGANIZATION}
+```

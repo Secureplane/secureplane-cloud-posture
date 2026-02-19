@@ -1,0 +1,32 @@
+stages:
+  - security-scan
+  - vulnerability-check
+  - compliance-check
+
+include:
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
+  - template: Security/API-Security.gitlab-ci.yml
+
+api_security_scan:
+  stage: security-scan
+  script:
+    - python src/scanners/api/api_scanner.py scan --environment ${CI_ENVIRONMENT_NAME}
+  artifacts:
+    reports:
+      security: gl-api-security-report.json
+
+vulnerability_assessment:
+  stage: vulnerability-check
+  script:
+    - python src/scanners/api/api_scanner.py assess --severity-threshold HIGH
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+compliance_check:
+  stage: compliance-check
+  script:
+    - python src/scanners/api/api_scanner.py compliance-check --standards PCI-DSS,OWASP
+  artifacts:
+    reports:
+      compliance: gl-compliance-report.json

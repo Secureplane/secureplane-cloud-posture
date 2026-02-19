@@ -1,0 +1,20 @@
+{
+    "identifier": "numpy",
+    "version": "1.21.0",
+    "description": "NumPy scientific computing package",
+    "variants": [
+        {
+            "identifier": "py39",
+            "install-location": "/usr/local/lib/python3.9/site-packages/numpy",
+            "requirements": ["python >= 3.9, < 3.10"]
+        },
+        {
+            "identifier": "py38",
+            "install-location": "/usr/local/lib/python3.8/site-packages/numpy",
+            "requirements": ["python >= 3.8, < 3.9"]
+        }
+    ],
+    "environ": {
+        "PYTHONPATH": "${INSTALL_LOCATION}:${PYTHONPATH}"
+    }
+}

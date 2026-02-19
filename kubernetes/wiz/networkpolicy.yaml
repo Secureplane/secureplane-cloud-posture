@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: wiz-network-policy
+  namespace: wiz-system
+spec:
+  podSelector:
+    matchLabels:
+      app: wiz-console
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: wiz-system
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: wiz-system

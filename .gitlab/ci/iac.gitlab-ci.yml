@@ -1,0 +1,38 @@
+stages:
+  - iac-validate
+  - iac-plan
+  - iac-apply
+
+.iac_template: &iac_template
+  image: hashicorp/terraform:latest
+  before_script:
+    - cd terraform/${CI_ENVIRONMENT_NAME}
+
+validate:
+  <<: *iac_template
+  stage: iac-validate
+  script:
+    - terraform init
+    - terraform validate
+    - checkov -d .
+    - tfsec .
+
+plan:
+  <<: *iac_template
+  stage: iac-plan
+  script:
+    - terraform init
+    - terraform plan -out=plan.tfplan
+  artifacts:
+    paths:
+      - terraform/${CI_ENVIRONMENT_NAME}/plan.tfplan
+
+apply:
+  <<: *iac_template
+  stage: iac-apply
+  script:
+    - terraform init
+    - terraform apply plan.tfplan
+  dependencies:
+    - plan
+  when: manual

@@ -1,0 +1,22 @@
+wiz:
+  apiEndpoint: "https://api.wiz.io/v1"
+  apiKey: "${WIZ_API_KEY}"
+  apiSecret: "${WIZ_API_SECRET}"
+  region: "us-east-1"
+
+scanner:
+  interval: 3600
+  enabled: true
+  types:
+    - cspm
+    - cwpp
+    - dspm
+
+monitoring:
+  enabled: true
+  metrics:
+    interval: 60
+    retention: 604800
+  alerts:
+    slack: "${SLACK_WEBHOOK_URL}"
+    email: "security-alerts@company.com"

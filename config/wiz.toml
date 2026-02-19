@@ -1,0 +1,28 @@
+[api]
+endpoint = "https://api.wiz.io"
+timeout = 30
+
+[scanning]
+interval = 3600
+parallel_scans = 10
+
+[security]
+min_severity = "HIGH"
+enable_attack_path_analysis = true
+
+[reporting]
+format = "json"
+include_recommendations = true
+
+[cloud_providers]
+aws = true
+azure = true
+gcp = true
+
+[compliance]
+frameworks = ["CIS", "PCI-DSS", "HIPAA"]
+enable_continuous_monitoring = true
+
+[graph]
+max_depth = 5
+include_indirect_relationships = true

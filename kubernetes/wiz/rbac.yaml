@@ -1,0 +1,21 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: wiz-console-role
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: wiz-console-binding
+subjects:
+- kind: ServiceAccount
+  name: wiz-console-sa
+  namespace: wiz-system
+roleRef:
+  kind: ClusterRole
+  name: wiz-console-role
+  apiGroup: rbac.authorization.k8s.io

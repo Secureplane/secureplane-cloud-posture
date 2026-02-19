@@ -1,0 +1,23 @@
+aws:
+  region: us-west-2
+  vpc_cidr: "172.16.0.0/16"
+
+security:
+  compliance:
+    enabled: true
+    frameworks:
+      - cis-aws
+      - pci-dss
+      - hipaa
+  scanning:
+    frequency: daily
+    tools:
+      - tfsec
+      - checkov
+      - terrascan
+
+monitoring:
+  enabled: true
+  alerts:
+    slack_webhook: ""
+    email: "prod-alerts@company.com"

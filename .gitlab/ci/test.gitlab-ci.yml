@@ -1,0 +1,19 @@
+stages:
+  - test
+
+unit_tests:
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - pytest tests/unit/
+  artifacts:
+    reports:
+      junit: test-results.xml
+
+integration_tests:
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - pytest tests/integration/
+  rules:
+    - if: $CI_MERGE_REQUEST_ID

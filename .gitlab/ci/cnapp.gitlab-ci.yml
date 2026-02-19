@@ -1,0 +1,35 @@
+stages:
+  - cnapp-scan
+
+cloud_posture:
+  stage: cnapp-scan
+  variables:
+    WIZ_API_KEY: ${WIZ_API_KEY}
+    WIZ_API_SECRET: ${WIZ_API_SECRET}
+  script:
+    - python src/scanners/cspm/scan.py ${CI_ENVIRONMENT_NAME}
+  artifacts:
+    reports:
+      security: gl-cspm-report.json
+
+workload_protection:
+  stage: cnapp-scan
+  variables:
+    WIZ_API_KEY: ${WIZ_API_KEY}
+    WIZ_API_SECRET: ${WIZ_API_SECRET}
+  script:
+    - python src/scanners/cwpp/scan.py ${CI_ENVIRONMENT_NAME}
+  artifacts:
+    reports:
+      security: gl-cwpp-report.json
+
+identity_scan:
+  stage: cnapp-scan
+  variables:
+    WIZ_API_KEY: ${WIZ_API_KEY}
+    WIZ_API_SECRET: ${WIZ_API_SECRET}
+  script:
+    - python src/scanners/identity/scan.py ${CI_ENVIRONMENT_NAME}
+  artifacts:
+    reports:
+      security: gl-identity-report.json

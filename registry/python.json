@@ -1,0 +1,20 @@
+{
+    "identifier": "python",
+    "version": "3.9.0",
+    "description": "Python interpreter environment",
+    "install-location": "/usr/local/python/3.9.0",
+    "system": {
+        "platform": "linux",
+        "arch": "x86_64",
+        "os": "el >= 7, < 8"
+    },
+    "command": {
+        "python": "python3.9",
+        "pip": "pip3.9"
+    },
+    "environ": {
+        "PATH": "${INSTALL_LOCATION}/bin:${PATH}",
+        "PYTHONPATH": "${INSTALL_LOCATION}/lib/python3.9/site-packages:${PYTHONPATH}",
+        "LD_LIBRARY_PATH": "${INSTALL_LOCATION}/lib:${LD_LIBRARY_PATH}"
+    }
+}

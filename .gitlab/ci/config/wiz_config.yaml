@@ -1,0 +1,26 @@
+console:
+  endpoint: https://api.wiz.io
+  port: 443
+  log_level: info
+
+scanning:
+  interval: 3600
+  modules:
+    ai_security: true
+    cloud_security: true
+    kubernetes: true
+    container: true
+
+security:
+  network_policies: true
+  pod_security: true
+  rbac: true
+
+integrations:
+  gitlab:
+    enabled: true
+    scan_pipeline: true
+  cloud_providers:
+    aws: true
+    azure: true
+    gcp: true
